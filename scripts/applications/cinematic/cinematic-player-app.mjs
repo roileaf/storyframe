@@ -3,6 +3,7 @@ import { PlayerViewerApp } from '../player-viewer.mjs';
 import { PF2E_ACTION_DISPLAY_NAMES } from '../../system/pf2e/actions.mjs';
 import { CinematicSceneBase } from './cinematic-base-app.mjs';
 import { MODULE_ID } from '../../constants.mjs';
+import { isStoryFrameIgnored } from '../../utils/element-utils.mjs';
 
 /**
  * Player-side Cinematic Scene app.
@@ -591,7 +592,7 @@ export class CinematicPlayerApp extends CinematicSceneBase {
 
     // Journal image popout buttons (open in new tab)
     panel.querySelectorAll('.journal-content-body img').forEach(img => {
-      if (img.closest('.journal-img-wrapper')) return;
+      if (img.closest('.journal-img-wrapper') || isStoryFrameIgnored(img)) return;
       const wrapper = document.createElement('div');
       wrapper.classList.add('journal-img-wrapper');
       img.parentNode.insertBefore(wrapper, img);

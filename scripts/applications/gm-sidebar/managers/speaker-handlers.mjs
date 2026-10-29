@@ -3,7 +3,7 @@
  * Handles all speaker (NPC) related operations including add, remove, set active, and journal integration
  */
 
-import { extractParentElement } from '../../../utils/element-utils.mjs';
+import { extractParentElement, isStoryFrameIgnored } from '../../../utils/element-utils.mjs';
 
 /**
  * Extract a display name from an image file path by stripping the directory and extension.
@@ -467,6 +467,7 @@ export function extractJournalImages(sidebar) {
   contentElements.forEach((content) => {
     const imgElements = content.querySelectorAll('img');
     imgElements.forEach((img) => {
+      if (isStoryFrameIgnored(img)) return;
       const normalizedSrc = normalizeImagePath(img.src);
       if (img.src && !img.src.includes('icons/svg/mystery-man') && !speakerImages.has(normalizedSrc)) {
         images.push({

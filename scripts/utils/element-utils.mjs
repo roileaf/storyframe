@@ -23,6 +23,22 @@ export function extractElement(html, fallback = null) {
 }
 
 /**
+ * Selector for journal content StoryFrame should skip (decorative images, styled boxes).
+ * Matches the element itself or any ancestor, so a wrapper can exclude everything inside it.
+ */
+export const STORYFRAME_IGNORE_SELECTOR =
+  '.storyframe-ignore, [data-storyframe-ignore], [data-tag="storyframe-ignore"]';
+
+/**
+ * Check whether a journal element has been marked to be ignored by StoryFrame.
+ * @param {Element} element
+ * @returns {boolean}
+ */
+export function isStoryFrameIgnored(element) {
+  return !!element?.closest?.(STORYFRAME_IGNORE_SELECTOR);
+}
+
+/**
  * Extract parent element from sheet/application interface.
  * Handles ApplicationV2 apps that may return a sub-element (e.g. MEJ returns a header button)
  * by traversing up to the .application root or falling back to DOM lookup by app ID.

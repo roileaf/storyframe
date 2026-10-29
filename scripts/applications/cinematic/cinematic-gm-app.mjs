@@ -1,5 +1,6 @@
 import { MODULE_ID } from '../../constants.mjs';
 import * as SystemAdapter from '../../system-adapter.mjs';
+import { isStoryFrameIgnored } from '../../utils/element-utils.mjs';
 import { PlayerViewerApp } from '../player-viewer.mjs';
 import { CinematicSceneBase } from './cinematic-base-app.mjs';
 
@@ -1249,7 +1250,7 @@ export class CinematicGMApp extends CinematicSceneBase {
 
     // Journal image "show to players" buttons
     this.element?.querySelectorAll('.journal-content-body img').forEach(img => {
-      if (img.closest('.journal-img-wrapper')) return;
+      if (img.closest('.journal-img-wrapper') || isStoryFrameIgnored(img)) return;
       const wrapper = document.createElement('div');
       wrapper.classList.add('journal-img-wrapper');
       img.parentNode.insertBefore(wrapper, img);

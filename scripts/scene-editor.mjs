@@ -5,6 +5,7 @@
 
 import { MODULE_ID } from './constants.mjs';
 import { loadCSS } from './css-loader.mjs';
+import { isStoryFrameIgnored } from './utils/element-utils.mjs';
 
 /**
  * Show scene editor dialog
@@ -88,6 +89,7 @@ export async function showSceneEditor({ sceneId = null, sceneName = '', speakers
     const imgs = contentElement.querySelectorAll('img[src]');
     const imageMap = new Map();
     Array.from(imgs).forEach(img => {
+      if (isStoryFrameIgnored(img)) return;
       if (!imageMap.has(img.src)) {
         imageMap.set(img.src, {
           src: img.src,
