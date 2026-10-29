@@ -7,6 +7,12 @@ All notable changes to StoryFrame will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.3] - 2026-10-29
+
+### Added
+
+- **Ignore journal images** — images marked with the `storyframe-ignore` class, a `data-storyframe-ignore` attribute, or `data-tag="storyframe-ignore"` are skipped by the journal image list, scene editor, and cinematic image buttons. Put the marker on a wrapper element to skip every image inside it, such as decorative images in styled boxes.
+
 ## [3.1.2] - 2026-10-11
 
 ### Fixed
